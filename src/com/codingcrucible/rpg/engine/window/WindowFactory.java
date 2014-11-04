@@ -5,12 +5,14 @@
  */
 package com.codingcrucible.rpg.engine.window;
 
-/**
- *
- * @author aurix
- */
-public interface Window {
+public class WindowFactory {
 
-    void setVisible(boolean visible);
+    private WindowFactory() {
+    }
+    
+    public static final Window createWindow(String frameName, int width, int height){
+        return new WindowImpl(frameName, width, height);
+    }
+    
     
 }

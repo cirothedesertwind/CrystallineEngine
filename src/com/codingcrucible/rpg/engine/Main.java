@@ -5,7 +5,14 @@
  */
 package com.codingcrucible.rpg.engine;
 
-import com.codingcrucible.rpg.engine.window.Window;
+import com.codingcrucible.rpg.engine.data.GameData;
+import com.google.gson.Gson;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,11 +20,24 @@ import com.codingcrucible.rpg.engine.window.Window;
  */
 public class Main {
 
-    public Main() {
-        Window w = new Window("Example", 300, 300);
-    }
-
     public static void main(String[] args) {
-        Main m = new Main();
+        
+        String path = args[0];
+        byte[] encodedBytes = null;
+        
+        try {
+            encodedBytes = Files.readAllBytes(Paths.get(path));
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String jsonString = new String(encodedBytes, StandardCharsets.UTF_8);
+        
+        Gson g = new Gson();
+        GameData data = g.fromJson(jsonString, GameData.class);
+        Engine.Builder b = new Engine.Builder();
+        b.addWindow(data.name, data.width, data.height);
+        Engine e = new Engine(b);
+        e.start();
     }
 }

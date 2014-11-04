@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codingcrucible.rpg.engine.window;
+package com.codingcrucible.rpg.engine.data;
 
 /**
  *
  * @author aurix
  */
-public interface Window {
-
-    void setVisible(boolean visible);
-    
+public class GameData {
+    public String name;
+    public int width;
+    public int height;
 }
