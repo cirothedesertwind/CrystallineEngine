@@ -22,7 +22,13 @@ public class Main {
 
     public static void main(String[] args) {
         
-        String path = args[0];
+        //Initial boot location
+        String path = "src/com/codingcrucible/rpg/engine/boot.json";
+        
+        //If a game is being loaded, override
+        if (args.length != 0)
+            path = args[0];
+        
         byte[] encodedBytes = null;
         
         try {
