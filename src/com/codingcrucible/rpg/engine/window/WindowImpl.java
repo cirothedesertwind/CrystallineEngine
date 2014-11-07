@@ -5,7 +5,9 @@
  */
 package com.codingcrucible.rpg.engine.window;
 
+import java.awt.Color;
 import java.awt.Frame;
+import java.awt.Graphics;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -15,20 +17,19 @@ import javax.swing.JOptionPane;
  *
  * @author aurix
  */
-class WindowImpl implements Window {
+class WindowImpl extends Frame implements Window {
 
     private final ScheduledExecutorService refreshScheduler
             = Executors.newScheduledThreadPool(1);
-    private final Frame frame;
 
     public WindowImpl(String frameName, int width, int height) {
-        frame = new Frame(frameName);
-        frame.setSize(width, height);
+        super(frameName);
+        setSize(width, height);
 
-        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(frame,
+                if (JOptionPane.showConfirmDialog(null,
                         "Do you want to close the game?", "Closing the Game?",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
@@ -36,19 +37,17 @@ class WindowImpl implements Window {
                 }
             }
         });
-
-        refreshScheduler.scheduleAtFixedRate(
-                new Runnable() {
-                    public void run() {
-                        frame.repaint();
-                    }
-                }, 0, 20, TimeUnit.MILLISECONDS);
-
     }
     
     @Override
     public void setVisible(boolean visible){
-        frame.setVisible(visible);
+        super.setVisible(visible);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, getWidth(), getHeight());
     }
 
 }

@@ -7,6 +7,7 @@ package com.codingcrucible.rpg.engine;
 
 import com.codingcrucible.rpg.engine.window.Window;
 import com.codingcrucible.rpg.engine.window.WindowFactory;
+import java.awt.Color;
 
 public class Engine {
 
