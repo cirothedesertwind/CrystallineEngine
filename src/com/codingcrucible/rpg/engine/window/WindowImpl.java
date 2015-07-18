@@ -33,7 +33,7 @@ class WindowImpl extends Frame implements Window {
                         "Do you want to close the game?", "Closing the Game?",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                    System.exit(0);
+                    quit();
                 }
             }
         });
@@ -48,6 +48,11 @@ class WindowImpl extends Frame implements Window {
     public void paint(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
+    }
+
+    @Override
+    public void quit() {
+        System.exit(0);
     }
 
 }

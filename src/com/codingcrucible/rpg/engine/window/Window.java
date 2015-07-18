@@ -13,4 +13,6 @@ public interface Window {
 
     void setVisible(boolean visible);
     
+    void quit();
+    
 }
