@@ -49,7 +49,7 @@ public class Main {
         
         Engine.Builder b = new Engine.Builder();
         b.addWindow(data.name, data.width, data.height);
-        Engine e = new Engine(b);
+        Engine e = b.build();
         e.start();
     }
 }

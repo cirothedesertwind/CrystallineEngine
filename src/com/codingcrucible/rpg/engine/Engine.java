@@ -29,10 +29,14 @@ public class Engine {
             this.name = name;
             w = WindowFactory.createWindow(name, width, height);
         }
+        
+        public Engine build(){
+            return new Engine(w);
+        }
     }
     
-    public Engine(Builder b) {
-        w = b.w;
+    private Engine(Window w) {
+       this.w = w;
     }
     
     public void start(){
