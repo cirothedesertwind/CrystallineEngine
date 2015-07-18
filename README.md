@@ -1,5 +1,5 @@
-# RPGEngine
-A 2D RPG engine.
+# Crystalline RPG Engine
+A tile-based 2D RPG engine.
 
 ## License
 
