@@ -20,27 +20,33 @@ import java.util.logging.Logger;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
-        //Initial boot location
-        String path = "src/com/codingcrucible/rpg/engine/boot.json";
+        GameData data;
         
-        //If a game is being loaded, override
-        if (args.length != 0)
-            path = args[0];
-        
-        byte[] encodedBytes = null;
-        
-        try {
-            encodedBytes = Files.readAllBytes(Paths.get(path));
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        //If a game is being loaded from a boot.json file
+        if (args.length != 0) {
+            String path = args[0];
+
+            try {
+                byte[] encodedBytes = Files.readAllBytes(Paths.get(path));
+                String jsonString = new String(encodedBytes, StandardCharsets.UTF_8);
+                Gson g = new Gson();
+                data = g.fromJson(jsonString, GameData.class);
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                throw ex;
+            }   
+        }
+        else {
+            // show standard initialization screen
+            // important for new users to assure them that everything is ok
+            data = new GameData();
+            data.name = "RPG Engine";
+            data.width = 800;
+            data.height = 600;
         }
         
-        String jsonString = new String(encodedBytes, StandardCharsets.UTF_8);
-        
-        Gson g = new Gson();
-        GameData data = g.fromJson(jsonString, GameData.class);
         Engine.Builder b = new Engine.Builder();
         b.addWindow(data.name, data.width, data.height);
         Engine e = new Engine(b);
