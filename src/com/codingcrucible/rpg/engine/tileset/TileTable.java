@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codingcrucible.rpg.tileset;
+package com.codingcrucible.rpg.engine.tileset;
 
 import java.awt.image.BufferedImage;
 
